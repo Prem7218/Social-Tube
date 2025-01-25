@@ -7,7 +7,7 @@ const Shimmer = () => {
     const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
 
     // Create 12 shimmer cards
-    for (let i = 0; i <= 12; i++) {
+    for (let i = 0; i <= 11; i++) {
         cards.push(
             <div 
                 key={i} 

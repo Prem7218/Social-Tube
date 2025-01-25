@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const suggestSlice = createSlice({
     name: "suggestion",
-    initialState: {},
+    initialState: [],
     reducers: {
         suggestData: (state, action) => {
-            Object.assign(state, action.payload);
-        }
+            return action.payload;
+        }        
     }
 })
 

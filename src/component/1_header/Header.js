@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { appLogo, hamBurger, profile } from "../../utils/header_image/image";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../../utils/2_slice/appSlice";
-import { SUGGEST_DATAS, SUGGEST_SEARCH, SUGGETION_URL } from "../../utils/youtube_SVG/tab_and_svg";
+import { SUGGETION_URL } from "../../utils/youtube_SVG/tab_and_svg";
 import { cacheResults } from "../../utils/2_slice/searchSlice";
-import { suggestData } from "../../utils/2_slice/suggestSlice";
+import { Link } from "react-router-dom";
 
 const Header = () => {
 
@@ -12,17 +12,6 @@ const Header = () => {
   const [searchData, setSearchData] = React.useState([]);
   const dispatch = useDispatch();
   const suggestionData = useSelector((store) => store.sSlice);
-
-  const handleClickSearch = async (data) => {
-    try {
-      const mainData = await fetch(SUGGEST_SEARCH + data + SUGGEST_DATAS);
-      const resp = await mainData.json();
-      console.log("DT: ", resp.items);
-      dispatch(suggestData(resp.items));
-    } catch(e) {
-      console.log("E: ",e);
-    }
-  }
 
   const handleClick = () => {
     dispatch(toggleMenu());
@@ -80,23 +69,22 @@ const Header = () => {
           type="text"
           placeholder="Search"
         />
-        <button 
-          onClick={() => handleClickSearch(searchQuery)}
-          className="lg:w-16 md:w-14 rounded-r-full bg-gray-300 p-2">
-          <b>🔍</b>
-        </button>
+        <Link to={`/searchSuggestion/${encodeURIComponent(searchQuery)}`}>
+          <button 
+            className="lg:w-16 md:w-14 rounded-r-full bg-gray-300 p-2">
+            <b>🔍</b>
+          </button>
+        </Link>
 
         {searchQuery ? <div className="z-10 fixed bg-white w-96 flex flex-col justify-center lg:w-[40rem] md:w-[30rem] rounded-lg p-3 mt-2 hover:shadow-lg">
           {
             searchData.map((data, index) => {
               return (
-                  <div
-                    onClick={() => handleClickSearch(data)}
-                    key={index}
-                    className="flex my-2 hover:bg-gray-50 hover:cursor-help p-2 rounded-lg">
-                    🔍
-                    <h1 className="ml-3">{data}</h1>
-                  </div>
+                <Link key={index} to={`/searchSuggestion/${encodeURIComponent(data)}`}>
+                  <button className="flex w-full my-2 hover:bg-gray-100 hover:cursor-grab p-2 rounded-lg">
+                    🔍 {data}
+                  </button>
+                </Link>
               );
             })
           }
