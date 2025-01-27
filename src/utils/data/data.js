@@ -256,6 +256,40 @@ var nameList = [
   "Paradox",
 ];
 
+export const live_Count_Limit = 200; 
+
+export function nthPrime(num) {
+  var P = 0;
+
+  function isPrime(x) {
+      var isPrime= true;
+
+      for (var d = 2; d <= Math.sqrt(x); d++) {
+          if((x/d) % 1 === 0) {
+              isPrime = false;
+              break;
+          }
+      }
+
+      return isPrime;
+  }
+
+  for (var i = 1; 0 < num; i++) {
+
+      if(isPrime(i)) {
+          P = i; num--;
+      }
+
+      // we can skip the even numbers
+      if(3 <= i){
+          i++;
+      }
+
+  }
+
+  return P;
+}
+
 export function randomName() {
   return nameList[Math.floor(Math.random() * nameList.length)];
 }

@@ -15,7 +15,7 @@ const LiveChat = ( { closeForLiveChat } ) => {
     const message = setInterval(() => {
       dispatch(addMessages(
         {
-          id: Math.random() * (0) + 10,
+          id: Math.random() * (10 - 5) + 10,
           name: randomName(),
           comment: randomMessage(),
           replies: []
@@ -29,7 +29,7 @@ const LiveChat = ( { closeForLiveChat } ) => {
   const handleMessage = (messages) => {
     dispatch(addMessages(
       {
-        id: Math.random() * (0) + 10,
+        id: Math.random() * (15-14) + 10,
         name: "Prem R Mahajan",
         comment: messages,
         replies: []
@@ -40,10 +40,11 @@ const LiveChat = ( { closeForLiveChat } ) => {
   if(!messageMe) return [];
  
   return (
-    <div className="flex flex-col md:justify-between lg:justify-between p-4 rounded-lg shadow-md w-full mx-auto mt-4 lg:h-[35rem] md:h-[30rem] mb-5">
-      {/* Messages Container */}
-      <CommentContainer commentData={messageMe} closeForLiveChat={closeForLiveChat} />
-  
+    <div>
+      <div className="flex flex-col-reverse md:justify-between lg:justify-between p-4 rounded-lg shadow-md w-full mx-auto mt-4 lg:h-[32rem] md:h-[28rem] mb-5">
+        {/* Messages Container */}
+        <CommentContainer commentData={messageMe} closeForLiveChat={closeForLiveChat} />
+      </div>
       {/* Message Input Section */}
       <div className="flex gap-4 justify-center mt-[3%] items-center">
         <label className="text-lg font-medium text-gray-700 lg:block md:hidden">Message:</label>

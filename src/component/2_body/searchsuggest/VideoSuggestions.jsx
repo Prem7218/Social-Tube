@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SUGGEST_DATAS, SUGGEST_SEARCH } from "../../../utils/youtube_SVG/tab_and_svg";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { suggestData } from "../../../utils/2_slice/suggestSlice";
 import VideoCardSuggest from "./VideoCard";
 import { toggleMenu } from "../../../utils/2_slice/appSlice";
@@ -39,32 +39,38 @@ const VideoSuggestions = () => {
   }
 
   return (
-    <div className="m-5">
-      <h2 className="text-2xl font-bold mb-6 text-black">
-        Search Results for "<span className="text-red-400">{paramData}</span>"
-      </h2>
-      {MainsuggestData.map((item) => {
-        const {
-          id: { videoId },
-          snippet: {
-            title,
-            channelTitle,
-            thumbnails: { medium },
-            publishTime,
-          },
-        } = item;
+    <div className="md:w-[80%] lg:w-full flex flex-col items-center">
+      <div className="m-5 w-[90%]">
+        <h2 className="text-2xl font-bold mb-6 text-black">
+          Search Results for "<span className="text-red-400">{paramData}</span>"
+        </h2>
+        {MainsuggestData.map((item) => {
+          const {
+            id: { videoId },
+            snippet: {
+              title,
+              channelTitle,
+              thumbnails: { medium },
+              publishTime,
+            },
+          } = item;
 
-        return (
-          <VideoCardSuggest
+          return (
+            <Link 
             key={videoId}
-            videoId={videoId}
-            title={title}
-            channelTitle={channelTitle}
-            thumbnail={medium.url}
-            publishTime={publishTime}
-          />
-        );
-      })}
+            to={`/watch?v=${videoId}`}>
+              <VideoCardSuggest
+                key={videoId}
+                videoId={videoId}
+                title={title}
+                channelTitle={channelTitle}
+                thumbnail={medium.url}
+                publishTime={publishTime}
+              />
+            </Link>
+          );
+        })}
+      </div>
     </div>
   );  
 };

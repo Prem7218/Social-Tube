@@ -19,7 +19,7 @@ const RenderComment = ({ comment, closeForLiveChat }) => {
                 <p>{closeForLiveChat ? "API-Polling: " : "Comment: "} {comment.comment}</p>
             </div>
 
-            {closeForLiveChat ? "" : 
+            {closeForLiveChat || comment.replies.length === 0 ? "" : 
                 <button 
                     className={`${openMessage ? "bg-red-200" : "bg-blue-200"}`}
                     onClick={() => handleMessageBox()}>{openMessage ? "Close" : "Open"}

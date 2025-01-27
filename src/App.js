@@ -9,6 +9,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import appStore from './utils/1_store/appStore';
 import { Provider } from 'react-redux';
 import Header from './component/1_header/Header';
+import DemoMemoHook from './component/demo_Memo Hook/DemoMemoHook';
+import Demo2 from './component/demo_Memo Hook/2_Demo';
 
   const isMenuOpen = appStore.getState().app.isMenuOpen;
   
@@ -39,6 +41,14 @@ import Header from './component/1_header/Header';
           {
             path: "/searchSuggestion/:value",
             element: <VideoSuggestions />
+          },
+          {
+            path: "/demo",
+            element: 
+              <>
+                <DemoMemoHook/>
+                <Demo2 />  
+              </>
           }
         ]
       }

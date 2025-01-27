@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { live_Count_Limit } from "../data/data";
 
 const chatSlice = createSlice({
     name: "chating",
@@ -7,7 +8,11 @@ const chatSlice = createSlice({
     },
     reducers: {
         addMessages: (state, action) => {
-            state.messages.unshift(action.payload);
+            // state.messages.spilce(3, 1);
+            if(state.messages.length >= live_Count_Limit) {
+                state.messages.pop();
+            }
+            state.messages.push(action.payload);
         },
     }
 })
