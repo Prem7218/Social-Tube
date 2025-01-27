@@ -3,7 +3,7 @@ import React from 'react';
 import './index.css';
 import Body from './component/2_body/Body';
 import MainBody from './component/2_body/maincontainer/MainBody';
-import Watch from './component/2_body/Watch';
+import Watch from './component/3_watching/1_Watch';
 import VideoSuggestions from './component/2_body/searchsuggest/VideoSuggestions';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import appStore from './utils/1_store/appStore';

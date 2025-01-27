@@ -3,12 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { SUGGEST_DATAS, SUGGEST_SEARCH } from "../../../utils/youtube_SVG/tab_and_svg";
 import { useParams } from "react-router-dom";
 import { suggestData } from "../../../utils/2_slice/suggestSlice";
+import VideoCardSuggest from "./VideoCard";
+import { toggleMenu } from "../../../utils/2_slice/appSlice";
 
 const VideoSuggestions = () => {
   const MainsuggestData = useSelector((store) => store.suggestS);
+  const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
   const { value } = useParams();
   const paramData = decodeURIComponent(value);
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if(!isMenuOpen) {
+      dispatch(toggleMenu());
+    }
+  }, [dispatch, isMenuOpen]);
 
   useEffect(() => {
     const fetchSuggestions = async () => {
@@ -29,51 +39,34 @@ const VideoSuggestions = () => {
   }
 
   return (
-    <div className="p-6">
-      <h2 className="text-xl font-bold mb-4">Search Results for "{paramData}"</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {MainsuggestData.map((item) => {
-          const {
-            id: { videoId },
-            snippet: {
-              title,
-              channelTitle,
-              thumbnails: { medium },
-              publishTime,
-            },
-          } = item;
+    <div className="m-5">
+      <h2 className="text-2xl font-bold mb-6 text-black">
+        Search Results for "<span className="text-red-400">{paramData}</span>"
+      </h2>
+      {MainsuggestData.map((item) => {
+        const {
+          id: { videoId },
+          snippet: {
+            title,
+            channelTitle,
+            thumbnails: { medium },
+            publishTime,
+          },
+        } = item;
 
-          return (
-            <div
-              key={videoId}
-              className="group border border-gray-200 rounded-lg overflow-hidden shadow-sm bg-white transition-transform transform hover:scale-105 hover:shadow-md"
-            >
-              <a
-                href={`https://www.youtube.com/watch?v=${videoId}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  className="w-full h-48 object-cover"
-                  src={medium.url}
-                  alt={title}
-                />
-              </a>
-              <div className="p-3">
-                <h3 className="text-sm font-semibold text-gray-800 truncate group-hover:text-red-600">
-                  {title}
-                </h3>
-                <p className="text-xs text-gray-500 truncate">{channelTitle}</p>
-                <p className="text-xs text-gray-400 mt-1">
-                  {new Date(publishTime).toLocaleDateString()}
-                </p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+        return (
+          <VideoCardSuggest
+            key={videoId}
+            videoId={videoId}
+            title={title}
+            channelTitle={channelTitle}
+            thumbnail={medium.url}
+            publishTime={publishTime}
+          />
+        );
+      })}
     </div>
-  );
+  );  
 };
 
 export default VideoSuggestions;
