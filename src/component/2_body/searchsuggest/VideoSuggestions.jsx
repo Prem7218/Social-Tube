@@ -23,7 +23,7 @@ const VideoSuggestions = () => {
   useEffect(() => {
     const fetchSuggestions = async () => {
       try {
-        const mainData = await fetch(SUGGEST_SEARCH + paramData + SUGGEST_DATAS);
+        const mainData = await fetch("https://cors-anywhere.herokuapp.com/" + SUGGEST_SEARCH + paramData + SUGGEST_DATAS);
         const resp = await mainData.json();
         dispatch(suggestData(resp.items));
       } catch (e) {
