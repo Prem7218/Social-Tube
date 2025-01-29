@@ -21,7 +21,7 @@ const Header = () => {
     
     const handleSuggestion = async () => {
       try {
-        const suggestData =await fetch(SUGGETION_URL + searchQuery);
+        const suggestData =await fetch("https://cors-anywhere.herokuapp.com/" + SUGGETION_URL + searchQuery);
         const suggestJson = await suggestData.json();
         setSearchData(suggestJson[1]);
         dispatch(cacheResults({
