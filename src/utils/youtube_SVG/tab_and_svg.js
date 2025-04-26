@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const youtubeAPI_KEY = "AIzaSyD5ncW6UbJ8m9tWMY8ntroDnu-bGi18w78";
+const youtubeAPI_KEY = "AIzaSyCDd5CMy4Zl-aC2Tz2x3EiYDt1AN2b52SA";
 export const SUGGEST_SEARCH = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&regionCode=IN&q=`;
 export const SUGGEST_DATAS  = `&key=${youtubeAPI_KEY}`;
 export const API_URL = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key=${youtubeAPI_KEY}`;
