@@ -10,7 +10,7 @@ const useFetchVideoData = () => {
 
     const handleVideos = async () => {
         try {
-            const data = await fetch("AIzaSyCDd5CMy4Zl-aC2Tz2x3EiYDt1AN2b52SA");
+            const data = await fetch(API_URL);
             const resp = await data.json();
             setVideo(resp.items);
         } catch (e) {
